@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Julia — Media Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF3E3;
+    --ink: #0D4D6D;
+    --coral: #FF9D7A;
+    --turquoise: #7FC8B4;
+    --citrus: #FFD35A;
+    --coral-soft: #FFE4D6;
+    --turq-soft: #DFF1EC;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: inherit; }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --cream: #17211F;
+      --ink: #F5EFE4;
+      --coral-soft: #3A2621;
+      --turq-soft: #17302E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --cream: #17211F;
+    --ink: #F5EFE4;
+    --coral-soft: #3A2621;
+    --turq-soft: #17302E;
+  }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  img, svg { max-width: 100%; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+  h1, h2, h3, .display { font-family: 'Unbounded', sans-serif; line-height: 1.05; margin: 0; }
+  a { color: inherit; }
+
+  /* ---------- HEADER ---------- */
+  header.kit-header {
+    position: relative;
+    padding: 64px 0 48px;
+    overflow: hidden;
+  }
+  .sun {
+    position: absolute;
+    top: -150px;
+    right: -150px;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--citrus), var(--coral) 72%);
+    opacity: 0.85;
+    z-index: 0;
+  }
+  .kit-header-inner { position: relative; z-index: 1; }
+  .kit-eyebrow {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--ink);
+    background: var(--turq-soft);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  header.kit-header h1 { font-size: clamp(2.6rem, 7vw, 4rem); font-weight: 800; }
+  .kit-tagline { font-size: clamp(1.05rem, 2.2vw, 1.25rem); max-width: 42ch; margin: 14px 0 0; font-weight: 500; opacity: 0.9; }
+  .kit-meta { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 22px; font-size: 0.92rem; font-weight: 500; }
+  .kit-meta span { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* ---------- SECTION LABEL ---------- */
+  .section-head { margin-bottom: 22px; }
+  .section-head h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); font-weight: 800; }
+  .section-head p { margin: 6px 0 0; opacity: 0.7; font-size: 0.94rem; max-width: 48ch; }
+  section { padding: 48px 0; }
+
+  /* ---------- STATS STRIP ---------- */
+  .stats-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: color-mix(in srgb, var(--ink) 12%, transparent);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .stats-strip > div { background: var(--cream); padding: 28px 20px; text-align: center; }
+  .stats-strip .num { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 1.9rem; display: block; }
+  .stats-strip .label { font-size: 0.78rem; opacity: 0.62; margin-top: 4px; }
+
+  /* ---------- PLATFORMS ---------- */
+  .platforms { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .platform-card {
+    border-radius: 18px;
+    padding: 26px 24px;
+  }
+  .platform-card.ig { background: var(--coral-soft); }
+  .platform-card.tt { background: var(--turq-soft); }
+  .platform-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
+  .platform-card .handle { font-size: 0.86rem; opacity: 0.75; margin-bottom: 14px; }
+  .platform-card .p-stats { display: flex; gap: 20px; flex-wrap: wrap; }
+  .platform-card .p-stats div { font-size: 0.8rem; opacity: 0.65; }
+  .platform-card .p-stats strong { display: block; font-family: 'Unbounded', sans-serif; font-size: 1.1rem; color: var(--ink); font-weight: 800; }
+  @media (max-width: 640px) { .platforms { grid-template-columns: 1fr; } }
+
+  /* ---------- PILLARS ---------- */
+  .pillars-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .pillar { padding: 18px 12px; text-align: center; border-radius: 14px; }
+  .pillar:nth-child(5n+1) { background: var(--coral-soft); }
+  .pillar:nth-child(5n+2) { background: var(--turq-soft); }
+  .pillar:nth-child(5n+3) { background: color-mix(in srgb, var(--citrus) 30%, transparent); }
+  .pillar:nth-child(5n+4) { background: var(--turq-soft); }
+  .pillar:nth-child(5n+5) { background: var(--coral-soft); }
+  .pillar span { font-weight: 700; font-size: 0.86rem; }
+  @media (max-width: 720px) { .pillars-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ---------- BRAND FIT ---------- */
+  .brandfit-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .bf-card {
+    border: 1.5px solid color-mix(in srgb, var(--ink) 12%, transparent);
+    border-radius: 16px;
+    padding: 20px 16px;
+  }
+  .bf-card .bf-num { font-family: 'Unbounded', sans-serif; font-weight: 800; color: var(--coral); font-size: 0.95rem; }
+  .bf-card h3 { font-size: 0.98rem; margin: 8px 0 6px; font-family: 'Inter'; font-weight: 700; }
+  .bf-card p { margin: 0; font-size: 0.82rem; opacity: 0.72; }
+  @media (max-width: 900px) { .brandfit-list { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .brandfit-list { grid-template-columns: 1fr; } }
+
+  /* ---------- COLLAB PACKAGES ---------- */
+  .packages { display: flex; flex-direction: column; gap: 10px; }
+  .package-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    border-radius: 14px;
+    background: var(--turq-soft);
+    flex-wrap: wrap;
+  }
+  .package-row .p-name { font-weight: 700; font-size: 0.98rem; }
+  .package-row .p-desc { font-size: 0.82rem; opacity: 0.7; margin-top: 2px; }
+  .package-row .p-rate {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    background: var(--cream);
+    padding: 8px 16px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .kit-note { font-size: 0.8rem; opacity: 0.55; margin-top: 14px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact {
+    background: var(--turq-soft);
+    color: var(--ink);
+    border-radius: 28px;
+    margin: 0 auto;
+    max-width: 984px;
+    padding: 56px 40px;
+    text-align: center;
+  }
+  .contact h2 { font-size: clamp(1.8rem, 4.4vw, 2.6rem); }
+  .contact p { max-width: 42ch; margin: 14px auto 26px; opacity: 0.8; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 13px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .contact-links {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    flex-wrap: wrap;
+  }
+  .contact-links a { text-decoration: none; opacity: 0.8; }
+  .contact-links a:hover { opacity: 1; }
+
+  footer { text-align: center; padding: 28px 28px 44px; font-size: 0.78rem; opacity: 0.5; }
+</style>
+</head>
+<body>
+
+<header class="kit-header">
+  <div class="sun" aria-hidden="true"></div>
+  <div class="wrap kit-header-inner">
+    <span class="kit-eyebrow">MEDIA KIT</span>
+    <h1>Julia</h1>
+    <p class="kit-tagline">Slavic-born, sunshine-based. Florida lifestyle content — salsa, movement, travel, and real life — for brands who want it to feel like a friend's recommendation, not an ad.</p>
+    <div class="kit-meta">
+      <span>Orlando, FL</span>
+      <span>@julietta_stp</span>
+      <span>Instagram &amp; TikTok</span>
+    </div>
+  </div>
+</header>
+
+<section id="stats">
+  <div class="wrap">
+    <div class="stats-strip">
+      <div><span class="num">1,014</span><span class="label">Instagram followers</span></div>
+      <div><span class="num">32K</span><span class="label">Views, last 30 days</span></div>
+      <div><span class="num">84</span><span class="label">Posts live</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="platforms">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Platforms</h2>
+      <p>Active and posting regularly across both.</p>
+    </div>
+    <div class="platforms">
+      <div class="platform-card ig">
+        <h3>Instagram</h3>
+        <div class="handle">@julietta_stp</div>
+        <div class="p-stats">
+          <div><strong>1,014</strong>Followers</div>
+          <div><strong>32K</strong>Views / 30d</div>
+          <div><strong>84</strong>Posts</div>
+        </div>
+      </div>
+      <div class="platform-card tt">
+        <h3>TikTok</h3>
+        <div class="handle">@julietta_stp</div>
+        <div class="p-stats">
+          <div><strong>[Add]</strong>Followers</div>
+          <div><strong>[Add]</strong>Avg. views</div>
+          <div><strong>[Add]</strong>Videos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pillars">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Content pillars</h2>
+      <p>What consistently shows up in the feed.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar"><span>Florida lifestyle</span></div>
+      <div class="pillar"><span>Salsa &amp; dance</span></div>
+      <div class="pillar"><span>Movement</span></div>
+      <div class="pillar"><span>Travel</span></div>
+      <div class="pillar"><span>Everyday / real life</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="brandfit">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Brand fit</h2>
+      <p>Categories where this content performs and feels native.</p>
+    </div>
+    <div class="brandfit-list">
+      <div class="bf-card">
+        <div class="bf-num">01</div>
+        <h3>Florida travel &amp; tourism</h3>
+        <p>Local spots and day trips shot where she actually goes.</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-num">02</div>
+        <h3>Fashion</h3>
+        <p>Everyday and going-out style, built around movement and travel.</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-num">03</div>
+        <h3>Skincare &amp; makeup</h3>
+        <p>Real routines and honest reviews, not a tutorial.</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-num">04</div>
+        <h3>Lifestyle brands</h3>
+        <p>Home, routine, and friend-group content with a relatable voice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="packages">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Collaboration options</h2>
+      <p>Fill in your rates below — placeholders are marked [Add rate].</p>
+    </div>
+    <div class="packages">
+      <div class="package-row">
+        <div><div class="p-name">Instagram Reel</div><div class="p-desc">1 dedicated Reel, feed + story share</div></div>
+        <div class="p-rate">[Add rate]</div>
+      </div>
+      <div class="package-row">
+        <div><div class="p-name">Instagram Carousel</div><div class="p-desc">Multi-slide feed post</div></div>
+        <div class="p-rate">[Add rate]</div>
+      </div>
+      <div class="package-row">
+        <div><div class="p-name">Instagram Photo Post</div><div class="p-desc">Single feed photo + caption</div></div>
+        <div class="p-rate">[Add rate]</div>
+      </div>
+      <div class="package-row">
+        <div><div class="p-name">Story Set</div><div class="p-desc">3–5 frame story sequence</div></div>
+        <div class="p-rate">[Add rate]</div>
+      </div>
+      <div class="package-row">
+        <div><div class="p-name">TikTok Video</div><div class="p-desc">1 dedicated TikTok video</div></div>
+        <div class="p-rate">[Add rate]</div>
+      </div>
+      <div class="package-row">
+        <div><div class="p-name">UGC Content Only</div><div class="p-desc">Raw footage/photos, no posting, brand owns usage rights</div></div>
+        <div class="p-rate">[Add rate]</div>
+      </div>
+    </div>
+    <p class="kit-note">Bundle discounts and usage/whitelisting rates available on request.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact">
+    <h2>Let's work together</h2>
+    <p>Open to collaborations in travel, fashion, skincare &amp; makeup, and Florida lifestyle brands.</p>
+    <a class="btn-primary" href="mailto:andreeva_julia@hotmail.com">Email me</a>
+    <div class="contact-links">
+      <a href="https://instagram.com/julietta_stp" target="_blank" rel="noopener">Instagram @julietta_stp</a>
+      <a href="https://tiktok.com/@julietta_stp" target="_blank" rel="noopener">TikTok @julietta_stp</a>
+    </div>
+  </div>
+</section>
+
+<footer>Rates and availability subject to change. Updated media kit on request.</footer>
+
+</body>
+</html>
