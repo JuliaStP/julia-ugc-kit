@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Julia — UGC Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FFF3E3;
+    --ink: #0D4D6D;
+    --coral: #FF9D7A;
+    --turquoise: #7FC8B4;
+    --citrus: #FFD35A;
+    --coral-soft: #FFE4D6;
+    --turq-soft: #DFF1EC;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: inherit; }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --cream: #17211F;
+      --ink: #F5EFE4;
+      --coral-soft: #3A2621;
+      --turq-soft: #17302E;
+    }
+  }
+  :root[data-theme="dark"] {
+    --cream: #17211F;
+    --ink: #F5EFE4;
+    --coral-soft: #3A2621;
+    --turq-soft: #17302E;
+  }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  img, svg { max-width: 100%; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+
+  h1, h2, h3, .display {
+    font-family: 'Unbounded', sans-serif;
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  a { color: inherit; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 50;
+    background: color-mix(in srgb, var(--cream) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 28px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .logo {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--coral); }
+  .nav-links { display: flex; gap: 26px; font-weight: 500; font-size: 0.92rem; }
+  .nav-links a { text-decoration: none; opacity: 0.75; transition: opacity .15s; }
+  .nav-links a:hover, .nav-links a:focus-visible { opacity: 1; }
+  .nav-cta {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding: 64px 0 56px;
+    overflow: hidden;
+  }
+  .sun {
+    position: absolute;
+    top: -140px;
+    right: -140px;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--citrus), var(--coral) 72%);
+    opacity: 0.9;
+    z-index: 0;
+  }
+  .wave-line {
+    position: absolute;
+    left: -60px;
+    bottom: -10px;
+    width: 340px;
+    opacity: 0.5;
+    z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .eyebrow-loc {
+    font-weight: 600;
+    font-size: 0.86rem;
+    color: var(--turquoise);
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 9vw, 5.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .hero-tagline {
+    font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+    max-width: 30ch;
+    margin: 18px 0 0;
+    font-weight: 500;
+  }
+  .hero-tagline .accent { color: var(--coral); }
+
+  .stat-row {
+    display: flex;
+    gap: 36px;
+    margin: 40px 0 34px;
+    flex-wrap: wrap;
+  }
+  .stat .num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    display: block;
+  }
+  .stat .label {
+    font-size: 0.82rem;
+    opacity: 0.65;
+    font-weight: 500;
+  }
+
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary, .btn-secondary {
+    padding: 13px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary { background: var(--ink); color: var(--cream); }
+  .btn-secondary {
+    background: transparent;
+    border: 1.5px solid color-mix(in srgb, var(--ink) 30%, transparent);
+  }
+  .btn-primary:hover { filter: brightness(1.1); }
+
+  /* ---------- PILLARS ---------- */
+  .pillars {
+    padding: 46px 0 10px;
+    border-top: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .pillar {
+    padding: 20px 14px;
+    text-align: center;
+    border-radius: 14px;
+  }
+  .pillar:nth-child(5n+1) { background: var(--coral-soft); }
+  .pillar:nth-child(5n+2) { background: var(--turq-soft); }
+  .pillar:nth-child(5n+3) { background: color-mix(in srgb, var(--citrus) 30%, transparent); }
+  .pillar:nth-child(5n+4) { background: var(--turq-soft); }
+  .pillar:nth-child(5n+5) { background: var(--coral-soft); }
+  .pillar .p-label {
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  @media (max-width: 720px) {
+    .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ---------- SECTION LABEL ---------- */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .section-head h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 800; }
+  .section-head p { margin: 0; max-width: 38ch; opacity: 0.7; font-size: 0.95rem; }
+
+  section { padding: 64px 0; }
+
+  /* ---------- CONTENT GRID ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .tile {
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 14px;
+    color: #fff;
+    width: 100%;
+  }
+  .tile.reel { aspect-ratio: 16 / 9; }
+  .tile.carousel, .tile.photo { aspect-ratio: 4 / 5; }
+  .tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.5) 100%);
+  }
+  .tile .cap {
+    position: relative;
+    z-index: 1;
+    font-weight: 600;
+    font-size: 0.86rem;
+  }
+  .tile .kind {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 1;
+    font-size: 0.7rem;
+    font-weight: 700;
+    background: rgba(255,255,255,.22);
+    backdrop-filter: blur(4px);
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+  .t1 { background: linear-gradient(135deg, #135E7D, #0D4D6D); }
+  .t2 { background: linear-gradient(135deg, #FFB79C, #FF9D7A); }
+  .t3 { background: linear-gradient(135deg, #FFE18C, #FFD35A); }
+  .t4 { background: linear-gradient(135deg, #A3DCC9, #7FC8B4); }
+  .t5 { background: linear-gradient(135deg, #0D4D6D, #7FC8B4); }
+  .t6 { background: linear-gradient(135deg, #FFD35A, #FF9D7A); }
+  .t7 { background: linear-gradient(135deg, #FF9D7A, #0D4D6D); }
+  .t8 { background: linear-gradient(135deg, #7FC8B4, #0D4D6D); }
+
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .grid-note {
+    margin-top: 16px;
+    font-size: 0.82rem;
+    opacity: 0.55;
+  }
+
+  /* ---------- STORY ---------- */
+  .story-section {
+    background: var(--turq-soft);
+    border-radius: 28px;
+    margin: 0 28px;
+    padding: 56px 40px;
+    max-width: 1064px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .story-photo {
+    aspect-ratio: 4/5;
+    border-radius: 20px;
+    background: linear-gradient(160deg, var(--citrus), var(--coral) 55%, var(--turquoise));
+    position: relative;
+  }
+  .story-photo .cap {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background: rgba(0,0,0,.28);
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+  .story-text h2 { margin-bottom: 16px; font-size: clamp(1.6rem, 3.2vw, 2.1rem); }
+  .story-text p { margin: 0 0 14px; opacity: 0.85; }
+  .passions-label { font-weight: 700 !important; font-size: 0.8rem !important; text-transform: uppercase; letter-spacing: 0.06em; color: var(--coral); margin: 18px 0 0 !important; opacity: 1 !important; }
+  .story-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .story-tags span {
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #fff;
+  }
+  @media (max-width: 760px) {
+    .story-grid { grid-template-columns: 1fr; }
+    .story-section { padding: 36px 24px; margin: 0 16px; }
+  }
+
+  /* ---------- BRAND FIT ---------- */
+  .brandfit-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .bf-card {
+    border: 1.5px solid color-mix(in srgb, var(--ink) 12%, transparent);
+    border-radius: 16px;
+    padding: 22px 18px;
+  }
+  .bf-card .bf-num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    color: var(--coral);
+    font-size: 1rem;
+  }
+  .bf-card h3 { font-size: 1.02rem; margin: 10px 0 6px; font-family: 'Inter'; font-weight: 700; }
+  .bf-card p { margin: 0; font-size: 0.86rem; opacity: 0.72; }
+  @media (max-width: 900px) { .brandfit-list { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .brandfit-list { grid-template-columns: 1fr; } }
+
+  /* ---------- PROOF / STATS STRIP ---------- */
+  .proof {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: color-mix(in srgb, var(--ink) 12%, transparent);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .proof > div {
+    background: var(--cream);
+    padding: 26px 20px;
+    text-align: center;
+  }
+  .proof .num { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 1.7rem; display: block; }
+  .proof .label { font-size: 0.78rem; opacity: 0.62; margin-top: 4px; }
+  @media (max-width: 620px) { .proof { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact {
+    background: var(--turq-soft);
+    color: var(--ink);
+    border-radius: 28px;
+    margin: 0 28px 40px;
+    padding: 64px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact h2 { font-size: clamp(2rem, 5vw, 3rem); }
+  .contact p { max-width: 40ch; margin: 16px auto 30px; opacity: 0.8; }
+  .contact .btn-primary { background: var(--ink); color: var(--cream); }
+  .contact-links {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    flex-wrap: wrap;
+  }
+  .contact-links a { text-decoration: none; opacity: 0.8; }
+  .contact-links a:hover { opacity: 1; }
+
+  footer {
+    text-align: center;
+    padding: 24px 28px 40px;
+    font-size: 0.78rem;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">julia<span>.</span></div>
+    <div class="nav-links">
+      <a href="#pillars">Content</a>
+      <a href="#grid">Recent work</a>
+      <a href="#story">Story</a>
+      <a href="#brandfit">Brand fit</a>
+    </div>
+    <a class="nav-cta" href="#contact">Work with me</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="sun" aria-hidden="true"></div>
+  <svg class="wave-line" viewBox="0 0 340 80" aria-hidden="true">
+    <path d="M0 40 Q 40 0, 80 40 T 160 40 T 240 40 T 340 40" fill="none" stroke="#7FC8B4" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  </svg>
+  <div class="wrap hero-inner">
+    <div class="eyebrow-loc">Orlando, Florida</div>
+    <h1>Julia</h1>
+    <p class="hero-tagline">Slavic-born, sunshine-based. <span class="accent">Salsa, travel, and real life</span> — content that feels like a text from a friend, not an ad.</p>
+
+    <div class="stat-row">
+      <div class="stat"><span class="num">1,014</span><span class="label">Followers</span></div>
+      <div class="stat"><span class="num">32K</span><span class="label">Views / 30 days</span></div>
+      <div class="stat"><span class="num">84</span><span class="label">Posts</span></div>
+    </div>
+
+    <div class="hero-ctas">
+      <a class="btn-primary" href="#contact">Get my media kit</a>
+      <a class="btn-secondary" href="https://instagram.com/julietta_stp" target="_blank" rel="noopener">@julietta_stp on Instagram</a>
+    </div>
+  </div>
+</header>
+
+<section class="pillars" id="pillars">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What I create</h2>
+      <p>Florida lifestyle content built around real habits, not staged ones.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar"><div class="p-label">Florida lifestyle</div></div>
+      <div class="pillar"><div class="p-label">Salsa &amp; dance</div></div>
+      <div class="pillar"><div class="p-label">Fitness &amp; training</div></div>
+      <div class="pillar"><div class="p-label">Travel</div></div>
+      <div class="pillar"><div class="p-label">Everyday / real life</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="grid">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Recent work</h2>
+      <p>A mix of Reels, carousels, and talking-to-camera content. Reels are shown 16:9.</p>
+    </div>
+    <div class="grid">
+      <div class="tile reel t1"><span class="kind">Reel</span><span class="cap">Gym &amp; cafecito — morning routine</span></div>
+      <div class="tile reel t2"><span class="kind">Reel</span><span class="cap">Florida weather be like — beach duo</span></div>
+      <div class="tile carousel t3"><span class="kind">Carousel</span><span class="cap">Mexico trip, 9-slide recap</span></div>
+      <div class="tile reel t4"><span class="kind">Reel</span><span class="cap">Salsa practice, Thursday nights</span></div>
+      <div class="tile photo t5"><span class="kind">Photo</span><span class="cap">St. Augustine, palms &amp; ocean</span></div>
+      <div class="tile reel t6"><span class="kind">Reel</span><span class="cap">Hot yoga, weekly ritual</span></div>
+      <div class="tile reel t7"><span class="kind">Reel</span><span class="cap">Girlfriends, workout banter</span></div>
+      <div class="tile photo t8"><span class="kind">Photo</span><span class="cap">Everyday Orlando, real life</span></div>
+    </div>
+    <p class="grid-note">Placeholder tiles — swap each one for your real photo or Reel cover before sharing. Reel tiles are sized 16:9.</p>
+  </div>
+</section>
+
+<section id="story">
+  <div class="story-section">
+    <div class="story-grid">
+      <div class="story-photo"><span class="cap">St. Petersburg → Orlando</span></div>
+      <div class="story-text">
+        <h2>Slavic-born, sunshine-based</h2>
+        <p>Born and raised in Saint Petersburg, Russia. Moved to Key West at 23 for a postgrad hotel internship, and eventually landed in Orlando — where the Florida chapter actually started.</p>
+        <p>Off camera I dance salsa twice a week with a semi-pro team and move most days — weights, cardio, Pilates, and yoga in rotation — and just moved my mom and cat over from Russia. On camera, that's exactly what shows up: real routines, not a highlight reel.</p>
+        <p class="passions-label">Passionate pursuits</p>
+        <div class="story-tags">
+          <span>Salsa dancing</span>
+          <span>Movement</span>
+          <span>Travel</span>
+          <span>Fashion</span>
+          <span>Skincare &amp; makeup</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="brandfit">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Brand fit</h2>
+      <p>Categories where this content performs and feels native.</p>
+    </div>
+    <div class="brandfit-list">
+      <div class="bf-card">
+        <div class="bf-num">01</div>
+        <h3>Florida travel &amp; tourism</h3>
+        <p>Local spots, day trips, and visitor-facing content shot where I actually go.</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-num">02</div>
+        <h3>Fashion</h3>
+        <p>Everyday and going-out style, built around movement, travel, and real routines.</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-num">03</div>
+        <h3>Skincare &amp; makeup</h3>
+        <p>Real routines and honest reviews — get-ready-with-me energy, not a tutorial.</p>
+      </div>
+      <div class="bf-card">
+        <div class="bf-num">04</div>
+        <h3>Lifestyle brands</h3>
+        <p>Home, routine, and friend-group content with a relatable, story-forward voice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="proof">
+      <div><span class="num">1,014</span><span class="label">Followers</span></div>
+      <div><span class="num">32K</span><span class="label">Views, last 30 days</span></div>
+      <div><span class="num">2,048</span><span class="label">Best trial Reel views</span></div>
+      <div><span class="num">84</span><span class="label">Posts live</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact">
+    <h2>Let's create something</h2>
+    <p>Open to UGC collaborations in travel, fashion, skincare &amp; makeup, and Florida lifestyle brands.</p>
+    <a class="btn-primary" href="mailto:andreeva_julia@hotmail.com">Email me</a>
+    <div class="contact-links">
+      <a href="https://instagram.com/julietta_stp" target="_blank" rel="noopener">Instagram @julietta_stp</a>
+      <a href="https://tiktok.com/@julietta_stp" target="_blank" rel="noopener">TikTok @julietta_stp</a>
+    </div>
+  </div>
+</section>
+
+<footer>Media kit &amp; rates available on request.</footer>
+
+</body>
+</html>
