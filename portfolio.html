@@ -141,13 +141,15 @@
     max-width: 340px;
     width: 100%;
     justify-self: end;
-    padding: 10px;
     overflow: hidden;
   }
   .hero-photo img {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
     object-fit: cover;
+    object-position: center top;
     display: block;
     border-radius: 16px;
   }
@@ -720,8 +722,8 @@
         <h3>Beauty</h3>
       </div>
       <div class="phone-grid">
-        <div class="phone-mock" data-video="videos/beauty/katesommerville.MOV" data-cover="23.82"><div class="notch"></div><div class="screen ph2"><span class="play"></span></div></div>
-        <div class="phone-mock" data-video="videos/beauty/drjart.MOV" data-cover="5.72"><div class="notch"></div><div class="screen ph3"><span class="play"></span></div></div>
+        <div class="phone-mock" data-video="videos/beauty/katesommerville.MOV" data-cover="23.82"><div class="notch"></div><div class="screen ph2"><span class="play"></span><span class="cap">Talking head</span></div></div>
+        <div class="phone-mock" data-video="videos/beauty/drjart.MOV" data-cover="5.72"><div class="notch"></div><div class="screen ph3"><span class="play"></span><span class="cap">ASMR</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph1"><span class="play"></span><span class="cap">Skincare fridge essentials</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph6"><span class="play"></span><span class="cap">New SPF, honest review</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph4"><span class="play"></span><span class="cap">5-minute no-makeup makeup</span></div></div>
@@ -734,7 +736,7 @@
         <h3>Wellness</h3>
       </div>
       <div class="phone-grid">
-        <div class="phone-mock" data-video="videos/wellness-fitness/thorne.MOV" data-cover="12.87"><div class="notch"></div><div class="screen ph1"><span class="play"></span></div></div>
+        <div class="phone-mock" data-video="videos/wellness-fitness/thorne.MOV" data-cover="12.87"><div class="notch"></div><div class="screen ph1"><span class="play"></span><span class="cap">Voiceover</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph5"><span class="play"></span><span class="cap">Dance practice, Thursday nights</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph4"><span class="play"></span><span class="cap">Pilates reset, morning routine</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph6"><span class="play"></span><span class="cap">Hot girl walk, Orlando sunset</span></div></div>
@@ -833,6 +835,7 @@
     }
     p.addEventListener('click', function () {
       if (!v) return;
+      if (p.classList.contains('playing')) return; // let the video controls handle pause/play
       v.classList.remove('preview');
       if (!p.classList.contains('playing')) v.currentTime = 0;
       v.muted = false;
