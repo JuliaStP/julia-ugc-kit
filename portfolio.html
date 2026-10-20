@@ -141,6 +141,15 @@
     max-width: 340px;
     width: 100%;
     justify-self: end;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 16px;
   }
   .hero-photo .cap {
     position: absolute;
@@ -156,8 +165,6 @@
   @media (max-width: 760px) {
     .hero-grid { grid-template-columns: 1fr; gap: 32px; }
     .hero-photo { justify-self: start; max-width: 280px; }
-    /* keep the sun in the corner, behind no text */
-    .sun { width: 220px; height: 220px; top: -110px; right: -110px; opacity: 0.85; }
   }
   .eyebrow-loc {
     font-weight: 600;
@@ -176,7 +183,15 @@
     margin: 18px 0 30px;
     font-weight: 500;
   }
-  .hero-tagline .accent { color: var(--coral); }
+  .hero-tagline .accent {
+    color: #7A2E12;
+    background: rgba(255,243,227,0.82);
+    padding: 0 .28em;
+    border-radius: 6px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    font-weight: 600;
+  }
 
   .stat-row {
     display: flex;
@@ -679,7 +694,7 @@
           <a class="btn-primary btn-sm" href="mailto:julietta.stp@gmail.com">Mail</a>
         </div>
       </div>
-      <div class="hero-photo" aria-label="Photo placeholder"><span class="cap">Your photo here</span></div>
+      <div class="hero-photo"><img src="images/julia-hero.jpg" alt="Julia smiling outdoors in Florida, palm trees behind her" width="240" height="300"></div>
     </div>
   </div>
 </header>
