@@ -210,6 +210,7 @@
     border: 1.5px solid color-mix(in srgb, var(--ink) 30%, transparent);
   }
   .btn-primary:hover { filter: brightness(1.1); }
+  .btn-sm { padding: 9px 20px; font-size: 0.85rem; }
 
   /* ---------- PILLARS ---------- */
   .pillars {
@@ -218,14 +219,15 @@
   }
   .pillars-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
   }
   .pillar {
-    padding: 20px 14px;
-    text-align: center;
-    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: left;
+    border-radius: 16px;
   }
+  .pillar .p-desc { margin: 8px 0 0; font-size: 0.86rem; opacity: 0.75; }
   .pillar:nth-child(5n+1) { background: var(--coral-soft); }
   .pillar:nth-child(5n+2) { background: var(--turq-soft); }
   .pillar:nth-child(5n+3) { background: color-mix(in srgb, var(--citrus) 30%, transparent); }
@@ -235,7 +237,7 @@
     font-weight: 700;
     font-size: 0.92rem;
   }
-  @media (max-width: 720px) {
+  @media (max-width: 900px) {
     .pillars-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
@@ -607,7 +609,6 @@
       <a href="#pillars">Content</a>
       <a href="#grid">Recent work</a>
       <a href="#services">Services</a>
-      <a href="#brandfit">Brand fit</a>
     </div>
     <a class="nav-cta" href="#contact">Work with me</a>
   </div>
@@ -626,7 +627,9 @@
         <p class="hero-tagline">Your Slavic-born, <span class="accent">sunshine-based</span> UGC creator. Creating content that feels like a text from a friend, not an ad.</p>
 
         <div class="hero-ctas">
-          <a class="btn-primary" href="https://instagram.com/julietta.stp" target="_blank" rel="noopener">@julietta.stp on Instagram</a>
+          <a class="btn-primary btn-sm" href="https://instagram.com/julietta.stp" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn-primary btn-sm" href="https://tiktok.com/@julietta.stp" target="_blank" rel="noopener">TikTok</a>
+          <a class="btn-primary btn-sm" href="mailto:julietta.stp@gmail.com">Mail</a>
         </div>
       </div>
       <div class="hero-photo" aria-label="Photo placeholder"><span class="cap">Your photo here</span></div>
@@ -638,14 +641,13 @@
   <div class="wrap">
     <div class="section-head">
       <h2>What I create</h2>
-      <p>Florida lifestyle content built around real habits, not staged ones.</p>
+      <p>Categories where this content performs and feels native.</p>
     </div>
     <div class="pillars-grid">
-      <div class="pillar"><div class="p-label">Florida lifestyle</div></div>
-      <div class="pillar"><div class="p-label">Salsa &amp; dance</div></div>
-      <div class="pillar"><div class="p-label">Fitness &amp; training</div></div>
-      <div class="pillar"><div class="p-label">Travel</div></div>
-      <div class="pillar"><div class="p-label">Everyday / real life</div></div>
+      <div class="pillar"><div class="p-label">Beauty &amp; skincare</div><p class="p-desc">Real routines and honest reviews — get-ready-with-me energy, not a tutorial.</p></div>
+      <div class="pillar"><div class="p-label">Wellness</div><p class="p-desc">Everyday habits, Pilates, yoga, and slow-morning resets shot where I actually live them.</p></div>
+      <div class="pillar"><div class="p-label">Fitness</div><p class="p-desc">Gym days, weights, cardio, and dance practice — progress shown as it really happens.</p></div>
+      <div class="pillar"><div class="p-label">Lifestyle</div><p class="p-desc">Home, routine, and Florida everyday content with a relatable, story-forward voice.</p></div>
     </div>
   </div>
 </section>
@@ -679,7 +681,7 @@
       </div>
       <div class="phone-grid">
         <div class="phone-mock"><div class="notch"></div><div class="screen ph1"><span class="play"></span><span class="cap">Gym day — upper body</span></div></div>
-        <div class="phone-mock"><div class="notch"></div><div class="screen ph5"><span class="play"></span><span class="cap">Salsa practice, Thursday nights</span></div></div>
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph5"><span class="play"></span><span class="cap">Dance practice, Thursday nights</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph4"><span class="play"></span><span class="cap">Pilates reset, morning routine</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph6"><span class="play"></span><span class="cap">Hot girl walk, Orlando sunset</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph2"><span class="play"></span><span class="cap">Cardio + core combo</span></div></div>
@@ -724,42 +726,11 @@
           <li><span class="check">&#10003;</span>Tutorial / how-to videos</li>
           <li><span class="check">&#10003;</span>Product reviews &amp; testimonials</li>
           <li><span class="check">&#10003;</span>Lifestyle integrations</li>
-          <li><span class="check">&#10003;</span>Lifestyle product photos</li>
-          <li><span class="check">&#10003;</span>Aesthetic still shots for Instagram &amp; websites</li>
+          <li><span class="check">&#10003;</span>Lifestyle product photography</li>
+          <li><span class="check">&#10003;</span>Multiple formats: organic, ad, BTS</li>
         </ul>
       </div>
       <div class="story-photo"><span class="cap">Talking head, aesthetic &amp; more</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="brandfit">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Brand fit</h2>
-      <p>Categories where this content performs and feels native.</p>
-    </div>
-    <div class="brandfit-list">
-      <div class="bf-card">
-        <div class="bf-num">01</div>
-        <h3>Beauty &amp; skincare</h3>
-        <p>Real routines and honest reviews — get-ready-with-me energy, not a tutorial.</p>
-      </div>
-      <div class="bf-card">
-        <div class="bf-num">02</div>
-        <h3>Wellness</h3>
-        <p>Everyday habits, Pilates, yoga, and slow-morning resets shot where I actually live them.</p>
-      </div>
-      <div class="bf-card">
-        <div class="bf-num">03</div>
-        <h3>Fitness</h3>
-        <p>Gym days, weights, cardio, and salsa practice — progress shown as it really happens.</p>
-      </div>
-      <div class="bf-card">
-        <div class="bf-num">04</div>
-        <h3>Lifestyle</h3>
-        <p>Home, routine, and Florida everyday content with a relatable, story-forward voice.</p>
-      </div>
     </div>
   </div>
 </section>
