@@ -283,6 +283,137 @@
     opacity: 0.55;
   }
 
+  /* ---------- NICHE SUBSECTIONS + PHONE MOCKUPS ---------- */
+  .niche-block { margin-bottom: 48px; }
+  .niche-block:last-child { margin-bottom: 0; }
+  .niche-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .niche-head h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+  }
+  .niche-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: var(--turq-soft);
+  }
+  .phone-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) { .phone-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 520px) { .phone-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .phone-mock {
+    width: 100%;
+    aspect-ratio: 9 / 19.5;
+    background: #fff;
+    border-radius: 28px;
+    padding: 6px;
+    box-shadow: 0 10px 24px rgba(13,77,109,0.14), 0 0 0 1px rgba(13,77,109,0.07);
+    position: relative;
+  }
+  .phone-mock .notch {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 34%;
+    height: 14px;
+    background: #fff;
+    border: 2px solid rgba(13,77,109,0.15);
+    border-radius: 999px;
+    z-index: 3;
+  }
+  .phone-mock .screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+  }
+  .phone-mock .screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.55) 100%);
+  }
+  .phone-mock .play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.28);
+    backdrop-filter: blur(2px);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1;
+  }
+  .phone-mock .play::after {
+    content: "";
+    border-style: solid;
+    border-width: 6px 0 6px 10px;
+    border-color: transparent transparent transparent #fff;
+    margin-left: 2px;
+  }
+  .phone-mock .cap {
+    position: relative;
+    z-index: 1;
+    padding: 9px 10px;
+    font-size: 0.64rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .ph1 { background: linear-gradient(145deg, #135E7D, #0D4D6D); }
+  .ph2 { background: linear-gradient(145deg, #FFB79C, #FF9D7A); }
+  .ph3 { background: linear-gradient(145deg, #FFE18C, #FFD35A); }
+  .ph4 { background: linear-gradient(145deg, #A3DCC9, #7FC8B4); }
+  .ph5 { background: linear-gradient(145deg, #0D4D6D, #7FC8B4); }
+  .ph6 { background: linear-gradient(145deg, #FFD35A, #FF9D7A); }
+
+  /* ---------- PHOTO GRID ---------- */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 760px) { .photo-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 520px) { .photo-grid { grid-template-columns: repeat(2, 1fr); } }
+  .photo-tile {
+    aspect-ratio: 4 / 5;
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    color: #fff;
+  }
+  .photo-tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.5) 100%);
+  }
+  .photo-tile .cap {
+    position: relative;
+    z-index: 1;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
   /* ---------- STORY ---------- */
   .story-section {
     background: var(--turq-soft);
@@ -439,7 +570,7 @@
 
     <div class="hero-ctas">
       <a class="btn-primary" href="media-kit.html">Get my media kit</a>
-      <a class="btn-secondary" href="https://instagram.com/julietta_stp" target="_blank" rel="noopener">@julietta_stp on Instagram</a>
+      <a class="btn-secondary" href="https://instagram.com/julietta.stp" target="_blank" rel="noopener">@julietta.stp on Instagram</a>
     </div>
   </div>
 </header>
@@ -464,19 +595,61 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Recent work</h2>
-      <p>A mix of Reels, carousels, and talking-to-camera content. Reels are shown 16:9.</p>
+      <p>Reels by niche, plus a photo grid. Tap-ready placeholders — swap each for a real clip or photo.</p>
     </div>
-    <div class="grid">
-      <div class="tile reel t1"><span class="kind">Reel</span><span class="cap">Gym &amp; cafecito — morning routine</span></div>
-      <div class="tile reel t2"><span class="kind">Reel</span><span class="cap">Florida weather be like — beach duo</span></div>
-      <div class="tile carousel t3"><span class="kind">Carousel</span><span class="cap">Mexico trip, 9-slide recap</span></div>
-      <div class="tile reel t4"><span class="kind">Reel</span><span class="cap">Salsa practice, Thursday nights</span></div>
-      <div class="tile photo t5"><span class="kind">Photo</span><span class="cap">St. Augustine, palms &amp; ocean</span></div>
-      <div class="tile reel t6"><span class="kind">Reel</span><span class="cap">Hot yoga, weekly ritual</span></div>
-      <div class="tile reel t7"><span class="kind">Reel</span><span class="cap">Girlfriends, workout banter</span></div>
-      <div class="tile photo t8"><span class="kind">Photo</span><span class="cap">Everyday Orlando, real life</span></div>
+
+    <div class="niche-block">
+      <div class="niche-head">
+        <h3>Beauty</h3>
+        <span class="niche-tag">6 Reels</span>
+      </div>
+      <div class="phone-grid">
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph2"><span class="play"></span><span class="cap">GRWM — everyday skincare</span></div></div>
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph3"><span class="play"></span><span class="cap">Date night makeup, start to finish</span></div></div>
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph1"><span class="play"></span><span class="cap">Skincare fridge essentials</span></div></div>
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph6"><span class="play"></span><span class="cap">New SPF, honest review</span></div></div>
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph4"><span class="play"></span><span class="cap">5-minute no-makeup makeup</span></div></div>
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph5"><span class="play"></span><span class="cap">Nighttime skincare routine</span></div></div>
+      </div>
     </div>
-    <p class="grid-note">Placeholder tiles — swap each one for your real photo or Reel cover before sharing. Reel tiles are sized 16:9.</p>
+
+    <div class="niche-block">
+      <div class="niche-head">
+        <h3>Wellness</h3>
+        <span class="niche-tag">6 Reels</span>
+      </div>
+      <div class="phone-grid">
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph1"><span class="play"></span><span class="cap">Gym day — upper body</span></div></div>
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph5"><span class="play"></span><span class="cap">Salsa practice, Thursday nights</span></div></div>
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph4"><span class="play"></span><span class="cap">Pilates reset, morning routine</span></div></div>
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph6"><span class="play"></span><span class="cap">Hot girl walk, Orlando sunset</span></div></div>
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph2"><span class="play"></span><span class="cap">Cardio + core combo</span></div></div>
+        <div class="phone-mock"><div class="notch"></div><div class="screen ph3"><span class="play"></span><span class="cap">Rest day stretch routine</span></div></div>
+      </div>
+    </div>
+
+    <div class="niche-block">
+      <div class="niche-head">
+        <h3>Photos</h3>
+        <span class="niche-tag">12 Photos</span>
+      </div>
+      <div class="photo-grid">
+        <div class="photo-tile t1"><span class="cap">Florida lifestyle</span></div>
+        <div class="photo-tile t2"><span class="cap">Beach day, golden hour</span></div>
+        <div class="photo-tile t3"><span class="cap">Skincare shelfie</span></div>
+        <div class="photo-tile t4"><span class="cap">Salsa team, performance night</span></div>
+        <div class="photo-tile t5"><span class="cap">Gym fit check</span></div>
+        <div class="photo-tile t6"><span class="cap">Travel, Mexico trip</span></div>
+        <div class="photo-tile t7"><span class="cap">Everyday Orlando</span></div>
+        <div class="photo-tile t8"><span class="cap">Makeup close-up</span></div>
+        <div class="photo-tile t1"><span class="cap">St. Augustine, palms &amp; ocean</span></div>
+        <div class="photo-tile t3"><span class="cap">Outfit of the day</span></div>
+        <div class="photo-tile t4"><span class="cap">Post-workout glow</span></div>
+        <div class="photo-tile t2"><span class="cap">Coffee &amp; cafecito morning</span></div>
+      </div>
+    </div>
+
+    <p class="grid-note">Placeholder tiles — swap each one for your real photo or Reel cover before sharing.</p>
   </div>
 </section>
 
@@ -547,10 +720,10 @@
   <div class="contact">
     <h2>Let's create something</h2>
     <p>Open to UGC collaborations in travel, fashion, skincare &amp; makeup, and Florida lifestyle brands.</p>
-    <a class="btn-primary" href="mailto:andreeva_julia@hotmail.com">Email me</a>
+    <a class="btn-primary" href="mailto:julietta.stp@gmail.com">Email me</a>
     <div class="contact-links">
-      <a href="https://instagram.com/julietta_stp" target="_blank" rel="noopener">Instagram @julietta_stp</a>
-      <a href="https://tiktok.com/@julietta_stp" target="_blank" rel="noopener">TikTok @julietta_stp</a>
+      <a href="https://instagram.com/julietta.stp" target="_blank" rel="noopener">Instagram @julietta.stp</a>
+      <a href="https://tiktok.com/@julietta.stp" target="_blank" rel="noopener">TikTok @julietta.stp</a>
     </div>
   </div>
 </section>
