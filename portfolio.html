@@ -463,6 +463,7 @@
     z-index: 2;
     background: #000;
   }
+  .phone-mock .vid.preview { z-index: 0; pointer-events: none; }
   .phone-mock.playing .play,
   .phone-mock.playing .cap { display: none; }
   .phone-mock.playing .screen::after { display: none; }
@@ -816,19 +817,24 @@
 
   // Tap a phone to play its video. Add data-video="videos/your-clip.mp4" to a .phone-mock to activate it.
   document.querySelectorAll('.phone-mock').forEach(function (p) {
+    var src = p.getAttribute('data-video');
+    var v = null;
+    if (src) {
+      // show the first frame of the video as the cover
+      v = document.createElement('video');
+      v.className = 'vid preview';
+      v.src = src + '#t=0.1';
+      v.preload = 'metadata';
+      v.muted = true;
+      v.setAttribute('playsinline', '');
+      v.loop = true;
+      p.querySelector('.screen').appendChild(v);
+    }
     p.addEventListener('click', function () {
-      var src = p.getAttribute('data-video');
-      if (!src) return;
-      var v = p.querySelector('video');
-      if (!v) {
-        v = document.createElement('video');
-        v.className = 'vid';
-        v.src = src;
-        v.setAttribute('playsinline', '');
-        v.controls = true;
-        v.loop = true;
-        p.querySelector('.screen').appendChild(v);
-      }
+      if (!v) return;
+      v.classList.remove('preview');
+      v.muted = false;
+      v.controls = true;
       p.classList.add('playing');
       v.play();
     });
