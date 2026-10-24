@@ -465,10 +465,35 @@
     z-index: 2;
     background: #000;
   }
-  .phone-mock .vid.preview { z-index: 0; pointer-events: none; }
-  .phone-mock.playing .play,
-  .phone-mock.playing .cap { display: none; }
-  .phone-mock.playing .screen::after { display: none; }
+  .phone-mock .vid { z-index: 0; }
+  .phone-mock .screen::after { pointer-events: none; }
+  .phone-mock[data-video] .play { display: none; }
+  .phone-mock .vctl {
+    position: absolute;
+    right: 8px;
+    z-index: 4;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    padding: 0;
+    border-radius: 50%;
+    background: rgba(13,77,109,0.62);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .phone-mock .vctl:hover { background: rgba(13,77,109,0.85); }
+  .phone-mock .vctl svg { width: 14px; height: 14px; fill: currentColor; }
+  .phone-mock .vctl-pause { top: 38px; }
+  .phone-mock .vctl-mute { top: 72px; }
+  .phone-mock .vctl .ic-play, .phone-mock .vctl .ic-on { display: none; }
+  .phone-mock.paused .vctl-pause .ic-play { display: block; }
+  .phone-mock.paused .vctl-pause .ic-pause { display: none; }
+  .phone-mock.unmuted .vctl-mute .ic-on { display: block; }
+  .phone-mock.unmuted .vctl-mute .ic-off { display: none; }
   .ph1 { background: linear-gradient(145deg, #135E7D, #0D4D6D); }
   .ph2 { background: linear-gradient(145deg, #FFB79C, #FF9D7A); }
   .ph3 { background: linear-gradient(145deg, #FFE18C, #FFD35A); }
@@ -737,7 +762,7 @@
       </div>
       <div class="phone-grid">
         <div class="phone-mock" data-video="videos/wellness-fitness/thorne.MOV" data-cover="12.87"><div class="notch"></div><div class="screen ph1"><span class="play"></span><span class="cap">Voiceover</span></div></div>
-        <div class="phone-mock"><div class="notch"></div><div class="screen ph5"><span class="play"></span><span class="cap">Dance practice, Thursday nights</span></div></div>
+        <div class="phone-mock" data-video="videos/wellness-fitness/cure.mov"><div class="notch"></div><div class="screen ph5"><span class="play"></span><span class="cap">Trend</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph4"><span class="play"></span><span class="cap">Pilates reset, morning routine</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph6"><span class="play"></span><span class="cap">Hot girl walk, Orlando sunset</span></div></div>
         <div class="phone-mock"><div class="notch"></div><div class="screen ph2"><span class="play"></span><span class="cap">Cardio + core combo</span></div></div>
@@ -817,33 +842,103 @@
     els.forEach(function (el) { io.observe(el); });
   })();
 
-  // Tap a phone to play its video. Add data-video="videos/your-clip.mp4" to a .phone-mock to activate it.
-  document.querySelectorAll('.phone-mock').forEach(function (p) {
-    var src = p.getAttribute('data-video');
-    var v = null;
-    if (src) {
-      // show the first frame of the video as the cover
-      v = document.createElement('video');
-      v.className = 'vid preview';
+  // Videos autoplay muted (when on screen). Add data-video="videos/your-clip.mp4" to a .phone-mock to activate it.
+  (function () {
+    var ICON_PAUSE = '<svg class="ic-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+    var ICON_SOUND = '<svg class="ic-off" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4z"/></svg><svg class="ic-on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>';
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items = [];
+
+    function muteOthers(except) {
+      items.forEach(function (it) {
+        if (it !== except) { it.v.muted = true; it.p.classList.remove('unmuted'); }
+      });
+    }
+
+    document.querySelectorAll('.phone-mock[data-video]').forEach(function (p) {
+      var src = p.getAttribute('data-video');
       var cover = p.getAttribute('data-cover') || '0.1';
-      v.src = src + '#t=' + cover;
+      var v = document.createElement('video');
+      v.className = 'vid';
+      v.src = src + '#t=' + cover;   // shows the chosen cover frame until it starts playing
       v.preload = 'metadata';
       v.muted = true;
-      v.setAttribute('playsinline', '');
       v.loop = true;
-      p.querySelector('.screen').appendChild(v);
-    }
-    p.addEventListener('click', function () {
-      if (!v) return;
-      if (p.classList.contains('playing')) return; // let the video controls handle pause/play
-      v.classList.remove('preview');
-      if (!p.classList.contains('playing')) v.currentTime = 0;
-      v.muted = false;
-      v.controls = true;
-      p.classList.add('playing');
-      v.play();
+      v.setAttribute('playsinline', '');
+      v.setAttribute('webkit-playsinline', '');
+      var screen = p.querySelector('.screen');
+      screen.appendChild(v);
+
+      var bPause = document.createElement('button');
+      bPause.className = 'vctl vctl-pause';
+      bPause.type = 'button';
+      bPause.setAttribute('aria-label', 'Pause or play video');
+      bPause.innerHTML = ICON_PAUSE;
+      var bMute = document.createElement('button');
+      bMute.className = 'vctl vctl-mute';
+      bMute.type = 'button';
+      bMute.setAttribute('aria-label', 'Turn sound on or off');
+      bMute.innerHTML = ICON_SOUND;
+      screen.appendChild(bPause);
+      screen.appendChild(bMute);
+
+      var it = { p: p, v: v, userPaused: false, started: false };
+      items.push(it);
+
+      function play() {
+        if (!it.started) { it.started = true; try { v.currentTime = 0; } catch (e) {} }
+        var pr = v.play();
+        if (pr && pr.catch) pr.catch(function () {});
+        p.classList.remove('paused');
+      }
+      function pause() { v.pause(); p.classList.add('paused'); }
+      function toggle() {
+        if (v.paused) { it.userPaused = false; play(); }
+        else { it.userPaused = true; pause(); }
+      }
+
+      bPause.addEventListener('click', function (e) { e.stopPropagation(); toggle(); });
+      v.addEventListener('click', toggle);
+      bMute.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (v.muted) {
+          muteOthers(it);
+          v.muted = false;
+          p.classList.add('unmuted');
+          if (v.paused && !it.userPaused) play();
+        } else {
+          v.muted = true;
+          p.classList.remove('unmuted');
+        }
+      });
+
+      it.start = function () { if (!it.userPaused && !reduce) play(); };
+      it.stop = function () { if (!v.paused) v.pause(); };
     });
-  });
+
+    if ('IntersectionObserver' in window) {
+      var vio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          var it = items.filter(function (x) { return x.p === en.target; })[0];
+          if (!it) return;
+          if (en.isIntersecting) it.start(); else it.stop();
+        });
+      }, { rootMargin: '150px 0px', threshold: 0.15 });
+      items.forEach(function (it) { vio.observe(it.p); });
+    } else {
+      items.forEach(function (it) { it.start(); });
+    }
+
+    // If the browser blocked autoplay, the first tap anywhere starts the videos that are on screen.
+    document.addEventListener('touchstart', function () {
+      items.forEach(function (it) {
+        if (it.v.paused && !it.userPaused && !reduce) {
+          var r = it.p.getBoundingClientRect();
+          if (r.bottom > 0 && r.top < window.innerHeight) it.start();
+        }
+      });
+    }, { once: true, passive: true });
+  })();
 </script>
 
 </body>
