@@ -487,8 +487,9 @@
   }
   .phone-mock .vctl:hover { background: rgba(13,77,109,0.85); }
   .phone-mock .vctl svg { width: 14px; height: 14px; fill: currentColor; }
-  .phone-mock .vctl-pause { top: 38px; }
-  .phone-mock .vctl-mute { top: 72px; }
+  .phone-mock .vctl-pause { bottom: 10px; right: 42px; }
+  .phone-mock .vctl-mute { bottom: 10px; right: 8px; }
+  .phone-mock[data-video] .cap { max-width: calc(100% - 80px); }
   .phone-mock .vctl .ic-play, .phone-mock .vctl .ic-on { display: none; }
   .phone-mock.paused .vctl-pause .ic-play { display: block; }
   .phone-mock.paused .vctl-pause .ic-pause { display: none; }
