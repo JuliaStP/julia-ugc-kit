@@ -598,6 +598,71 @@
     .story-section { padding: 36px 24px; margin: 0 16px; }
   }
 
+  /* ---------- SERVICES: SUN DISCS ON A WAVE ---------- */
+  #services .story-section { position: relative; overflow: hidden; }
+  .svc-head { text-align: center; position: relative; z-index: 1; }
+  .svc-head h2 { font-size: clamp(1.6rem, 3.2vw, 2.1rem); }
+  .svc-head p { margin: 10px 0 0; opacity: 0.75; }
+  .svc-wave {
+    position: absolute;
+    left: -5%;
+    width: 110%;
+    top: 52%;
+    height: 90px;
+    opacity: 0.45;
+    z-index: 0;
+    animation: swayWave 8s ease-in-out infinite;
+  }
+  .svc-suns {
+    list-style: none;
+    margin: 36px 0 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px 20px;
+    justify-items: center;
+  }
+  .svc-suns li {
+    width: 100%;
+    max-width: 190px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 600;
+    font-size: 0.86rem;
+    line-height: 1.25;
+    color: #0D4D6D;
+    box-shadow: 0 10px 24px rgba(13,77,109,0.12);
+    animation: floatDisc 7s ease-in-out infinite;
+  }
+  .svc-suns .sun-a { background: radial-gradient(circle at 35% 30%, #FFE7A3, #FFD35A 45%, #FF9D7A 100%); }
+  .svc-suns .sun-b { background: radial-gradient(circle at 35% 30%, #FFFFFF, #FFE4D6 55%, #FF9D7A 130%); }
+  .svc-suns .sun-c { background: radial-gradient(circle at 35% 30%, #EAF8F3, #A3DCC9 55%, #7FC8B4 100%); }
+  .svc-suns li:nth-child(2) { animation-delay: -1.2s; }
+  .svc-suns li:nth-child(3) { animation-delay: -2.4s; }
+  .svc-suns li:nth-child(4) { animation-delay: -3.6s; }
+  .svc-suns li:nth-child(5) { animation-delay: -4.8s; }
+  .svc-suns li:nth-child(6) { animation-delay: -0.6s; }
+  .svc-suns li:nth-child(7) { animation-delay: -1.8s; }
+  .svc-suns li:nth-child(8) { animation-delay: -3s; }
+  .svc-suns li:nth-child(even) { margin-top: 22px; }
+  @keyframes floatDisc { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @media (max-width: 760px) {
+    .svc-suns { grid-template-columns: repeat(2, 1fr); gap: 18px 14px; }
+    .svc-suns li { font-size: 0.78rem; padding: 14px; max-width: 148px; }
+    .svc-wave { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .svc-suns li, .svc-wave { animation: none; }
+  }
+
   /* ---------- SERVICES LIST ---------- */
   .services-list {
     list-style: none;
@@ -812,22 +877,23 @@
 
 <section id="services">
   <div class="story-section">
-    <div class="story-grid">
-      <div class="story-text">
+      <div class="svc-head">
         <h2>Services</h2>
-        <ul class="services-list">
-          <li><span class="check">&#10003;</span>Talking head videos</li>
-          <li><span class="check">&#10003;</span>Voiceover videos</li>
-          <li><span class="check">&#10003;</span>Aesthetic B-roll</li>
-          <li><span class="check">&#10003;</span>Tutorial / how-to videos</li>
-          <li><span class="check">&#10003;</span>Product reviews &amp; testimonials</li>
-          <li><span class="check">&#10003;</span>Lifestyle integrations</li>
-          <li><span class="check">&#10003;</span>Lifestyle product photography</li>
-          <li><span class="check">&#10003;</span>Multiple formats: organic, ad, BTS</li>
-        </ul>
+        <p>What I can create for your brand</p>
       </div>
-      <div class="story-photo"></div>
-    </div>
+      <svg class="svc-wave" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 60 Q 75 10, 150 60 T 300 60 T 450 60 T 600 60 T 750 60 T 900 60 T 1050 60 T 1200 60" fill="none" stroke="#7FC8B4" stroke-width="8" stroke-linecap="round"/>
+      </svg>
+      <ul class="svc-suns">
+        <li class="sun-a">Talking head videos</li>
+        <li class="sun-b">Voiceover videos</li>
+        <li class="sun-c">Aesthetic B-roll</li>
+        <li class="sun-a">Tutorials &amp; how-tos</li>
+        <li class="sun-b">Product reviews &amp; testimonials</li>
+        <li class="sun-c">Lifestyle integrations</li>
+        <li class="sun-a">Photography</li>
+        <li class="sun-b">Organic, ad &amp; BTS formats</li>
+      </ul>
   </div>
 </section>
 
