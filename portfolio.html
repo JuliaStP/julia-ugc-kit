@@ -106,10 +106,11 @@
     padding: 64px 0 56px;
     overflow: hidden;
   }
+  .hero-deco { position: absolute; inset: 0; max-width: 1120px; margin: 0 auto; pointer-events: none; z-index: 0; }
   .sun {
     position: absolute;
     top: -140px;
-    right: -140px;
+    right: -110px;
     width: 420px;
     height: 420px;
     border-radius: 50%;
@@ -119,13 +120,18 @@
   }
   .wave-line {
     position: absolute;
-    left: -60px;
+    left: 0;
     bottom: -10px;
-    width: 340px;
+    width: 300px;
     opacity: 0.5;
     z-index: 0;
   }
   .hero-inner { position: relative; z-index: 1; }
+  @media (max-width: 1180px) { .hero-deco { max-width: none; } .sun { right: -140px; } .wave-line { left: -60px; } }
+  @media (min-width: 1400px) {
+    .wrap, .nav-inner, .hero-deco { max-width: 1240px; }
+    .story-section { max-width: 1184px; }
+  }
   .hero-grid {
     display: grid;
     grid-template-columns: 1.3fr 0.8fr;
@@ -750,16 +756,18 @@
 </nav>
 
 <header class="hero">
-  <div class="sun" aria-hidden="true"></div>
+  <div class="hero-deco" aria-hidden="true">
+  <div class="sun"></div>
   <svg class="wave-line" viewBox="0 0 340 80" aria-hidden="true">
     <path d="M0 40 Q 40 0, 80 40 T 160 40 T 240 40 T 340 40" fill="none" stroke="#7FC8B4" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
   </svg>
+  </div>
   <div class="wrap hero-inner">
     <div class="hero-grid">
       <div class="hero-copy">
         <div class="eyebrow-loc">Orlando, Florida</div>
         <h1>Julia</h1>
-        <p class="hero-tagline">Your Slavic-born, <span class="accent">sunshine-based</span> UGC creator. Creating content that feels like a text from a friend, not an ad.</p>
+        <p class="hero-tagline">Your <span class="accent">sunshine-based</span> UGC creator. Creating content that feels like a text from a friend, not an ad.</p>
 
         <div class="hero-ctas">
           <a class="btn-primary btn-sm" href="https://instagram.com/julietta.stp" target="_blank" rel="noopener">Instagram</a>
