@@ -599,34 +599,41 @@
     .story-section { padding: 36px 24px; margin: 0 16px; }
   }
 
-  /* ---------- SERVICES: PHOTOS + LIST ---------- */
-  .svc-feature { display: grid; grid-template-columns: 1fr 1.05fr; gap: 44px; align-items: center; }
-  .svc-photos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  .svc-photo {
-    padding: 5px;
-    border-radius: 20px;
-    background: linear-gradient(145deg, #FF9D7A, #FFD35A 55%, #7FC8B4);
-    box-shadow: 0 10px 24px rgba(13,77,109,0.14);
-    transition: transform .3s ease;
+  /* ---------- HOW IT WORKS ---------- */
+  #services .story-section { padding: 0; overflow: hidden; }
+  .how { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
+  .how-copy { padding: 52px 40px 48px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .how-copy h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); text-transform: uppercase; letter-spacing: .02em; }
+  .how-sub { margin: 12px 0 0; opacity: 0.75; }
+  .how-steps { list-style: none; margin: 34px 0 0; padding: 0; display: flex; flex-direction: column; gap: 30px; max-width: 360px; }
+  .how-num {
+    width: 46px; height: 46px; margin: 0 auto 12px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Unbounded', sans-serif; font-weight: 700; color: #0D4D6D;
+    background: radial-gradient(circle at 35% 30%, #FFE7A3, #FFD35A 50%, #FF9D7A 120%);
+    box-shadow: 0 8px 18px rgba(13,77,109,0.16);
+    animation: floatDisc 7s ease-in-out infinite;
   }
-  .svc-photo:nth-child(even) { transform: translateY(26px); }
-  .svc-photo:nth-child(even):hover { transform: translateY(20px); }
-  .svc-photo:nth-child(odd):hover { transform: translateY(-6px); }
-  .svc-photo img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 15px; }
-  .svc-copy h2 { font-size: clamp(1.9rem, 4.2vw, 2.9rem); text-transform: uppercase; letter-spacing: .02em; }
-  .svc-copy .svc-rule { width: 120px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, #FF9D7A, #FFD35A, #7FC8B4); margin: 18px 0; }
-  .svc-copy .svc-intro { margin: 0; opacity: 0.8; max-width: 44ch; }
+  .how-steps li:nth-child(2) .how-num { animation-delay: -2s; background: radial-gradient(circle at 35% 30%, #FFFFFF, #FFE4D6 55%, #FF9D7A 130%); }
+  .how-steps li:nth-child(3) .how-num { animation-delay: -4s; background: radial-gradient(circle at 35% 30%, #EAF8F3, #A3DCC9 55%, #7FC8B4 100%); }
+  .how-steps h3 { font-size: 0.98rem; text-transform: uppercase; letter-spacing: .03em; margin: 0 0 8px; }
+  .how-steps p { margin: 0; font-size: 0.95rem; line-height: 1.5; opacity: 0.82; }
+  @keyframes floatDisc { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  .how-chips { list-style: none; margin: 34px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 420px; }
+  .how-chips li { font-size: 0.74rem; font-weight: 600; padding: 7px 12px; border-radius: 999px; background: color-mix(in srgb, var(--coral) 22%, var(--cream)); color: var(--ink); }
+  .how-chips li:nth-child(3n+2) { background: color-mix(in srgb, var(--citrus) 35%, var(--cream)); }
+  .how-chips li:nth-child(3n) { background: color-mix(in srgb, var(--turquoise) 35%, var(--cream)); }
+  .how-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 6px; background: linear-gradient(145deg, #FF9D7A, #FFD35A 55%, #7FC8B4); }
+  .how-photos img { display: block; width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 4px; }
+  .how-photos img:nth-child(1) { border-top-left-radius: 18px; }
+  .how-photos img:nth-child(2) { border-top-right-radius: 18px; }
+  .how-photos img:nth-child(3) { border-bottom-left-radius: 18px; }
+  .how-photos img:nth-child(4) { border-bottom-right-radius: 18px; }
   @media (max-width: 860px) {
-    .svc-feature { grid-template-columns: 1fr; gap: 40px; }
-    .svc-photos { max-width: 420px; margin: 0 auto; width: 100%; }
-    .svc-copy { text-align: left; }
+    .how { grid-template-columns: 1fr; }
+    .how-copy { padding: 40px 22px 36px; }
   }
-  @media (max-width: 480px) {
-    .svc-photos { gap: 10px; }
-    .svc-photo { padding: 4px; border-radius: 16px; }
-    .svc-photo img { border-radius: 12px; }
-    .svc-photo:nth-child(even) { transform: translateY(16px); }
-  }
+  @media (prefers-reduced-motion: reduce) { .how-num { animation: none; } }
 
   /* ---------- SERVICES LIST ---------- */
   .services-list {
@@ -842,27 +849,31 @@
 
 <section id="services">
   <div class="story-section">
-    <div class="svc-feature">
-      <div class="svc-photos">
-          <div class="svc-photo"><img src="images/photos/web/port_1.jpg" alt="Julia holding a laptop, on camera" loading="lazy"></div>
-          <div class="svc-photo"><img src="images/photos/web/port_2.jpg" alt="Julia holding a makeup brush, talking to camera" loading="lazy"></div>
-          <div class="svc-photo"><img src="images/photos/web/port_3.jpg" alt="Julia on camera, UGC creator portrait" loading="lazy"></div>
-          <div class="svc-photo"><img src="images/photos/web/port_4.jpg" alt="Julia on camera, UGC creator portrait" loading="lazy"></div>
-      </div>
-      <div class="svc-copy">
-        <h2>Services</h2>
-        <div class="svc-rule"></div>
-        <p class="svc-intro">What I can create for your brand &mdash; scroll-stopping, authentic content built to convert, shot at home in natural light.</p>
-        <ul class="services-list">
-          <li><span class="check">&#10003;</span><span>Talking head videos</span></li>
-          <li><span class="check">&#10003;</span><span>Voiceover videos</span></li>
-          <li><span class="check">&#10003;</span><span>Aesthetic B-roll</span></li>
-          <li><span class="check">&#10003;</span><span>Tutorials &amp; how-tos</span></li>
-          <li><span class="check">&#10003;</span><span>Product reviews &amp; testimonials</span></li>
-          <li><span class="check">&#10003;</span><span>Lifestyle integrations</span></li>
-          <li><span class="check">&#10003;</span><span>Photography</span></li>
-          <li><span class="check">&#10003;</span><span>Organic, ad &amp; BTS formats</span></li>
+    <div class="how">
+      <div class="how-copy">
+        <h2>How it works</h2>
+        <p class="how-sub">Simple, clear, no surprises.</p>
+        <ol class="how-steps">
+          <li><div class="how-num">1</div><h3>Contact me via email</h3><p>Tell me about your brand and what you need. We'll talk it through over email.</p></li>
+          <li><div class="how-num">2</div><h3>Contract, strategy &amp; details</h3><p>We agree on content details and delivery time before signing a simple contract. I send a script for your approval before filming, unless you provide one.</p></li>
+          <li><div class="how-num">3</div><h3>Your content is ready!</h3><p>I deliver the final files via WeTransfer, Google Drive or whatever works for you, then check in a couple of weeks later to make sure you're happy.</p></li>
+        </ol>
+        <ul class="how-chips" aria-label="Services">
+          <li>Talking head videos</li>
+          <li>Voiceover videos</li>
+          <li>Aesthetic B-roll</li>
+          <li>Tutorials &amp; how-tos</li>
+          <li>Product reviews &amp; testimonials</li>
+          <li>Lifestyle integrations</li>
+          <li>Photography</li>
+          <li>Organic, ad &amp; BTS formats</li>
         </ul>
+      </div>
+      <div class="how-photos">
+        <img src="images/photos/web/port_1.jpg" alt="Julia holding a laptop, on camera" loading="lazy">
+        <img src="images/photos/web/port_2.jpg" alt="Julia holding a makeup brush, talking to camera" loading="lazy">
+        <img src="images/photos/web/port_3.jpg" alt="Julia on camera, UGC creator portrait" loading="lazy">
+        <img src="images/photos/web/port_4.jpg" alt="Julia on camera, UGC creator portrait" loading="lazy">
       </div>
     </div>
   </div>
