@@ -507,9 +507,7 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-auto-flow: row dense;
-    gap: 8px;
-    max-width: 760px;
-    margin: 0 auto;
+    gap: 10px;
   }
   @media (max-width: 600px) { .photo-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; } }
   .photo-tile {
@@ -601,69 +599,33 @@
     .story-section { padding: 36px 24px; margin: 0 16px; }
   }
 
-  /* ---------- SERVICES: SUN DISCS ON A WAVE ---------- */
-  #services .story-section { position: relative; overflow: hidden; }
-  .svc-head { text-align: center; position: relative; z-index: 1; }
-  .svc-head h2 { font-size: clamp(1.6rem, 3.2vw, 2.1rem); }
-  .svc-head p { margin: 10px 0 0; opacity: 0.75; }
-  .svc-wave {
-    position: absolute;
-    left: -5%;
-    width: 110%;
-    top: 52%;
-    height: 90px;
-    opacity: 0.45;
-    z-index: 0;
-    animation: swayWave 8s ease-in-out infinite;
+  /* ---------- SERVICES: PHOTOS + LIST ---------- */
+  .svc-feature { display: grid; grid-template-columns: 1fr 1.05fr; gap: 44px; align-items: center; }
+  .svc-photos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .svc-photo {
+    padding: 5px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #FF9D7A, #FFD35A 55%, #7FC8B4);
+    box-shadow: 0 10px 24px rgba(13,77,109,0.14);
+    transition: transform .3s ease;
   }
-  .svc-suns {
-    list-style: none;
-    margin: 36px 0 0;
-    padding: 0;
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 26px 20px;
-    justify-items: center;
+  .svc-photo:nth-child(even) { transform: translateY(26px); }
+  .svc-photo:nth-child(even):hover { transform: translateY(20px); }
+  .svc-photo:nth-child(odd):hover { transform: translateY(-6px); }
+  .svc-photo img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 15px; }
+  .svc-copy h2 { font-size: clamp(1.9rem, 4.2vw, 2.9rem); text-transform: uppercase; letter-spacing: .02em; }
+  .svc-copy .svc-rule { width: 120px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, #FF9D7A, #FFD35A, #7FC8B4); margin: 18px 0; }
+  .svc-copy .svc-intro { margin: 0; opacity: 0.8; max-width: 44ch; }
+  @media (max-width: 860px) {
+    .svc-feature { grid-template-columns: 1fr; gap: 40px; }
+    .svc-photos { max-width: 420px; margin: 0 auto; width: 100%; }
+    .svc-copy { text-align: left; }
   }
-  .svc-suns li {
-    width: 100%;
-    max-width: 190px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 18px;
-    font-family: 'Unbounded', sans-serif;
-    font-weight: 600;
-    font-size: 0.86rem;
-    line-height: 1.25;
-    color: #0D4D6D;
-    box-shadow: 0 10px 24px rgba(13,77,109,0.12);
-    animation: floatDisc 7s ease-in-out infinite;
-  }
-  .svc-suns .sun-a { background: radial-gradient(circle at 35% 30%, #FFE7A3, #FFD35A 45%, #FF9D7A 100%); }
-  .svc-suns .sun-b { background: radial-gradient(circle at 35% 30%, #FFFFFF, #FFE4D6 55%, #FF9D7A 130%); }
-  .svc-suns .sun-c { background: radial-gradient(circle at 35% 30%, #EAF8F3, #A3DCC9 55%, #7FC8B4 100%); }
-  .svc-suns li:nth-child(2) { animation-delay: -1.2s; }
-  .svc-suns li:nth-child(3) { animation-delay: -2.4s; }
-  .svc-suns li:nth-child(4) { animation-delay: -3.6s; }
-  .svc-suns li:nth-child(5) { animation-delay: -4.8s; }
-  .svc-suns li:nth-child(6) { animation-delay: -0.6s; }
-  .svc-suns li:nth-child(7) { animation-delay: -1.8s; }
-  .svc-suns li:nth-child(8) { animation-delay: -3s; }
-  .svc-suns li:nth-child(even) { margin-top: 22px; }
-  @keyframes floatDisc { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-  @media (max-width: 760px) {
-    .svc-suns { grid-template-columns: repeat(2, 1fr); gap: 18px 14px; }
-    .svc-suns li { font-size: 0.78rem; padding: 14px; max-width: 148px; }
-    .svc-wave { display: none; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .svc-suns li, .svc-wave { animation: none; }
+  @media (max-width: 480px) {
+    .svc-photos { gap: 10px; }
+    .svc-photo { padding: 4px; border-radius: 16px; }
+    .svc-photo img { border-radius: 12px; }
+    .svc-photo:nth-child(even) { transform: translateY(16px); }
   }
 
   /* ---------- SERVICES LIST ---------- */
@@ -880,23 +842,29 @@
 
 <section id="services">
   <div class="story-section">
-      <div class="svc-head">
-        <h2>Services</h2>
-        <p>What I can create for your brand</p>
+    <div class="svc-feature">
+      <div class="svc-photos">
+          <div class="svc-photo"><img src="images/photos/web/port_1.jpg" alt="Julia holding a laptop, on camera" loading="lazy"></div>
+          <div class="svc-photo"><img src="images/photos/web/port_2.jpg" alt="Julia holding a makeup brush, talking to camera" loading="lazy"></div>
+          <div class="svc-photo"><img src="images/photos/web/port_3.jpg" alt="Julia on camera, UGC creator portrait" loading="lazy"></div>
+          <div class="svc-photo"><img src="images/photos/web/port_4.jpg" alt="Julia on camera, UGC creator portrait" loading="lazy"></div>
       </div>
-      <svg class="svc-wave" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 60 Q 75 10, 150 60 T 300 60 T 450 60 T 600 60 T 750 60 T 900 60 T 1050 60 T 1200 60" fill="none" stroke="#7FC8B4" stroke-width="8" stroke-linecap="round"/>
-      </svg>
-      <ul class="svc-suns">
-        <li class="sun-a">Talking head videos</li>
-        <li class="sun-b">Voiceover videos</li>
-        <li class="sun-c">Aesthetic B-roll</li>
-        <li class="sun-a">Tutorials &amp; how-tos</li>
-        <li class="sun-b">Product reviews &amp; testimonials</li>
-        <li class="sun-c">Lifestyle integrations</li>
-        <li class="sun-a">Photography</li>
-        <li class="sun-b">Organic, ad &amp; BTS formats</li>
-      </ul>
+      <div class="svc-copy">
+        <h2>Services</h2>
+        <div class="svc-rule"></div>
+        <p class="svc-intro">What I can create for your brand &mdash; scroll-stopping, authentic content built to convert, shot at home in natural light.</p>
+        <ul class="services-list">
+          <li><span class="check">&#10003;</span><span>Talking head videos</span></li>
+          <li><span class="check">&#10003;</span><span>Voiceover videos</span></li>
+          <li><span class="check">&#10003;</span><span>Aesthetic B-roll</span></li>
+          <li><span class="check">&#10003;</span><span>Tutorials &amp; how-tos</span></li>
+          <li><span class="check">&#10003;</span><span>Product reviews &amp; testimonials</span></li>
+          <li><span class="check">&#10003;</span><span>Lifestyle integrations</span></li>
+          <li><span class="check">&#10003;</span><span>Photography</span></li>
+          <li><span class="check">&#10003;</span><span>Organic, ad &amp; BTS formats</span></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
