@@ -150,13 +150,12 @@
   }
   .hero-photo img {
     position: absolute;
-    top: 10px; left: 10px; right: 10px; bottom: 10px;
-    width: calc(100% - 20px);
-    height: calc(100% - 20px);
-    object-fit: cover;
-    object-position: center top;
+    left: -6%;
+    bottom: 0;
+    width: 112%;
+    max-width: none;
+    height: auto;
     display: block;
-    border-radius: 16px;
   }
   .hero-photo .cap {
     position: absolute;
@@ -174,11 +173,18 @@
     .hero-photo { justify-self: start; max-width: 280px; }
   }
   .eyebrow-loc {
-    font-weight: 600;
-    font-size: 0.86rem;
-    color: var(--turquoise);
-    margin-bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ink);
+    background: var(--coral-soft);
+    padding: 8px 16px 8px 12px;
+    border-radius: 999px;
+    margin-bottom: 18px;
   }
+  .eyebrow-loc svg { width: 18px; height: 18px; fill: var(--coral); flex: none; }
   .hero h1 {
     font-size: clamp(3rem, 9vw, 5.4rem);
     font-weight: 800;
@@ -766,7 +772,7 @@
   <div class="wrap hero-inner">
     <div class="hero-grid">
       <div class="hero-copy">
-        <div class="eyebrow-loc">Orlando, Florida</div>
+        <div class="eyebrow-loc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Orlando, Florida</div>
         <h1>Julia</h1>
         <p class="hero-tagline">Your <span class="accent">sunshine-based</span> UGC creator. Creating content that feels like a text from a friend, not an ad.</p>
 
@@ -776,7 +782,7 @@
           <a class="btn-primary btn-sm" href="mailto:julietta.stp@gmail.com">Mail</a>
         </div>
       </div>
-      <div class="hero-photo"><img src="images/julia-hero.jpg" alt="Julia smiling outdoors in Florida, palm trees behind her" width="240" height="300"></div>
+      <div class="hero-photo"><img src="images/julia-hero.webp" alt="Julia smiling, cut-out portrait" width="789" height="800"></div>
     </div>
   </div>
 </header>
